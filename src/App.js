@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import {Route, Switch, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -16,8 +16,8 @@ import Preloader from "./components/common/Preloader/Preloader";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-const DialogsContainer = React.lazy(()=> import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(()=> import("./components/Profile/ProfileContainer"));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
 // const  = React.lazy(()=> import())
 
@@ -36,21 +36,16 @@ class App extends React.Component {
                 <div className="app-wrapper-content">
                     <React.Suspense fallback={<Preloader/>}>
                         <Switch>
-                        <Route exact path="/dialogs" component={DialogsContainer}
-                               /*render={() => <DialogsContainer/>}*//>
-                        <Route exact path="/profile/:userId?" component={ProfileContainer}
-                               /*render={() => <ProfileContainer/>}*//>
-                        <Route exact path="/users" component={UsersContainer}
-                               /*render={() => <UsersContainer/>}*//>
-                        <Route exact path="/login" component={Login}
-                               /*render={() => <Login/>}*//>
-                        <Route exact path="/news" component={News}
-                               /*render={() => <News/>}*//>
-                        <Route exact path="/music" component={Music}
-                               /*render={() => <Music/>}*//>
-                        <Route exact path="/settings" component={Settings}
-                               /*render={() => <Settings/>}*//>
-                            </Switch>
+                            <Route path='/' exact><Redirect to='/profile'/></Route>
+                            <Route exact path="/dialogs" component={DialogsContainer}/>
+                            <Route exact path="/profile/:userId?" component={ProfileContainer}/>
+                            <Route exact path="/users" component={UsersContainer}/>
+                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/news" component={News}/>
+                            <Route exact path="/music" component={Music}/>
+                            <Route exact path="/settings" component={Settings}/>
+                            <Route path="*" render={()=> <div>404 NOT FOUND</div>}/>
+                        </Switch>
                     </React.Suspense>
 
                 </div>
@@ -67,3 +62,4 @@ const mapStateToProps = state => ({
 export default compose(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App);
+

@@ -10,6 +10,8 @@
     width: 1200px;
     height: 1800px;
     margin: 0 auto;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
 }
 
 .app-wrapper-content {
