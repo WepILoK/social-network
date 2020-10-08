@@ -10,8 +10,8 @@ const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 let initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: "3"},
-        {id: 2, message: "It's my first posts", likesCount: "91"},
-        {id: 3, message: "Blalallalabla", likesCount: "91"},
+        {id: 2, message: "It's my first post", likesCount: "91"},
+        {id: 3, message: "Hello", likesCount: "91"},
         {id: 4, message: "Da-da", likesCount: "91"},
     ],
     profile: null,
@@ -36,7 +36,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_STATUS:
             return {...state, status: action.status}
         case DELETE_POST:
-            return {...state, posts: state.posts.filter(p => p.id != action.id)}
+            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         case SAVE_PHOTO_SUCCESS:
             return {...state, profile: {...state.profile, photos: action.photos}}
         default:

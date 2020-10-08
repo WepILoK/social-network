@@ -37,7 +37,7 @@ class App extends React.Component {
                     <React.Suspense fallback={<Preloader/>}>
                         <Switch>
                             <Route path='/' exact><Redirect to='/profile'/></Route>
-                            <Route exact path="/dialogs" component={DialogsContainer}/>
+                            <Route exact path="/dialogs/:userId?" component={DialogsContainer}/>
                             <Route exact path="/profile/:userId?" component={ProfileContainer}/>
                             <Route exact path="/users" component={UsersContainer}/>
                             <Route exact path="/login" component={Login}/>
