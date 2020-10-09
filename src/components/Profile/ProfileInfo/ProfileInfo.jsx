@@ -1,9 +1,11 @@
 import React, {useState} from "react";
-import style from "./ProfileInfo.module.scss";
+
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
-import userPhoto from "../../../assets/images/default_avatar.png";
+import {ProfileStatus} from "./ProfileStatus";
 import ProfileDataForm from "./ProfileDataForm";
+
+import userPhoto from "../../../assets/images/default_avatar.png";
+import style from "./ProfileInfo.module.scss";
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
 
@@ -36,7 +38,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
                     ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>
                 }
-                <ProfileStatus status={status} updateStatus={updateStatus} isOwner={isOwner}/>
+                <ProfileStatus profStatus={status} updateStatus={updateStatus} isOwner={isOwner}/>
             </div>
         </div>
     );

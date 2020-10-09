@@ -3,12 +3,12 @@ import style from './Profile.module.scss';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
+const Profile = ({isOwner, savePhoto, profile, status, updateStatus, saveProfile}) => {
     return (
         <div className={style.profile}>
-            <ProfileInfo isOwner={props.isOwner} profile={props.profile}
-                         status={props.status} updateStatus={props.updateStatus}
-                         savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>
+            <ProfileInfo isOwner={isOwner} profile={profile}
+                         status={status} updateStatus={updateStatus}
+                         savePhoto={savePhoto} saveProfile={saveProfile}/>
             <MyPostsContainer />
         </div>
     );

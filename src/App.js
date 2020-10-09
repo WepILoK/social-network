@@ -1,17 +1,19 @@
 import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar/Navbar';
 import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {compose} from "redux";
+
+import {initializeApp} from "./redux/app_reducer";
+import Navbar from './components/Navbar/Navbar';
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {initializeApp} from "./redux/app_reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+
+import './App.css';
 
 // import ProfileContainer from "./components/Profile/ProfileContainer";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -19,7 +21,6 @@ import Preloader from "./components/common/Preloader/Preloader";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
-// const  = React.lazy(()=> import())
 
 class App extends React.Component {
     componentDidMount() {
@@ -39,7 +40,7 @@ class App extends React.Component {
                             <Route path='/' exact><Redirect to='/profile'/></Route>
                             <Route exact path="/dialogs/:userId?" component={DialogsContainer}/>
                             <Route exact path="/profile/:userId?" component={ProfileContainer}/>
-                            <Route exact path="/users" component={UsersContainer}/>
+                            <Route exact path="/users" component={<UsersContainer pageTitle="Пользователи"/>}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/news" component={News}/>
                             <Route exact path="/music" component={Music}/>
