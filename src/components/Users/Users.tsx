@@ -18,7 +18,7 @@ type PropsType = {
     onPageChanged: (p: number) => void
 }
 
-const Users: React.FC<PropsType> = ({onPageChanged, currentPage, totalUsersCount, pageSize, users, follow, followingInProgress, isFetching, unFollow}) => {
+export const Users: React.FC<PropsType> = ({onPageChanged, currentPage, totalUsersCount, pageSize, users, follow, followingInProgress, isFetching, unFollow}) => {
     return (
         <div>
             <Paginator currentPage={currentPage} pageSize={pageSize}
@@ -33,5 +33,3 @@ const Users: React.FC<PropsType> = ({onPageChanged, currentPage, totalUsersCount
         </div>
     )
 }
-
-export default Users;

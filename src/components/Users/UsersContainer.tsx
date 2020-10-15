@@ -3,7 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 
 
-import Users from "./Users";
+import {Users} from "./Users";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {
     follow,
