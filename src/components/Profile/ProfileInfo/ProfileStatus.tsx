@@ -1,10 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 
-type PropsType = {
-    profStatus: string
-    isOwner: number
-    updateStatus: (status: string) => void
-}
 
 export const ProfileStatus: React.FC<PropsType> = ({profStatus, isOwner, updateStatus}) => {
     const [editMode, setEditMode] = useState(false);
@@ -43,3 +38,9 @@ export const ProfileStatus: React.FC<PropsType> = ({profStatus, isOwner, updateS
         </div>
     )
 };
+
+type PropsType = {
+    profStatus: string
+    isOwner: boolean
+    updateStatus: (status: string) => void
+}

@@ -1,22 +1,10 @@
 import React from "react";
 
-import User from "./User";
-import Paginator from "../common/Paginator/Paginator";
-import Preloader from "../common/Preloader/Preloader";
+import {User} from "./User";
+import {Paginator} from "../common/Paginator/Paginator";
+import {Preloader} from "../common/Preloader/Preloader";
 
 import {UsersType} from "../../types/types";
-
-type PropsType = {
-    currentPage: number
-    totalUsersCount: number
-    pageSize: number
-    isFetching: boolean
-    users: Array<UsersType>
-    followingInProgress: Array<number>
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    onPageChanged: (p: number) => void
-}
 
 export const Users: React.FC<PropsType> = ({onPageChanged, currentPage, totalUsersCount, pageSize, users, follow, followingInProgress, isFetching, unFollow}) => {
     return (
@@ -32,4 +20,16 @@ export const Users: React.FC<PropsType> = ({onPageChanged, currentPage, totalUse
                 </div>}
         </div>
     )
+}
+
+type PropsType = {
+    currentPage: number
+    totalUsersCount: number
+    pageSize: number
+    isFetching: boolean
+    users: Array<UsersType>
+    followingInProgress: Array<number>
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    onPageChanged: (p: number) => void
 }

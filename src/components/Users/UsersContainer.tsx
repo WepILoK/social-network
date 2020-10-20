@@ -2,7 +2,6 @@ import React from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
 
-
 import {Users} from "./Users";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {
@@ -22,26 +21,6 @@ import {
 import {UsersType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
-type MapStatePropsType = {
-    currentPage: number
-    pageSize: number
-    totalUsersCount: number
-    isFetching: boolean
-    users: Array<UsersType>
-    followingInProgress: Array<number>
-}
-
-type MapDispatchPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
-}
-
-type OwnPropsType = {
-    pageTitle: string
-}
-
-type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType> {
 
@@ -59,7 +38,7 @@ class UsersContainer extends React.Component<PropsType> {
 
         return (
             <>
-                <h2>{this.props.pageTitle}</h2>
+                <h2>{"Пользователи"}</h2>
                 <Users totalUsersCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        currentPage={this.props.currentPage}
@@ -86,9 +65,30 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
         follow, unFollow, getUsers: requestUsers
     }),
 )(UsersContainer);
+
+type MapStatePropsType = {
+    currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    isFetching: boolean
+    users: Array<UsersType>
+    followingInProgress: Array<number>
+}
+
+type MapDispatchPropsType = {
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+}
+
+type OwnPropsType = {
+    pageTitle: string
+}
+
+type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
