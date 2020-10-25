@@ -1,12 +1,13 @@
 import React, {ChangeEvent, useState} from "react";
 
-import Preloader from "../../common/Preloader/Preloader";
+import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 import ProfileDataForm from "./ProfileDataForm";
 
 import userPhoto from "../../../assets/images/default_avatar.png";
 
 import style from "./ProfileInfo.module.scss";
+
 import {ContactsType, ProfileType} from "../../../types/types";
 
 
