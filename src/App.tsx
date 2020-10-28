@@ -8,9 +8,9 @@ import Navbar from './components/Navbar/Navbar';
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import UsersContainer from "./components/Users/UsersContainer";
+import {Users} from "./components/Users/Users";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import {Login} from "./components/Login/Login";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
 import './App.css';
@@ -28,7 +28,7 @@ const App: React.FC<PropsType> = (props) => {
 
     if (!props.initialized) return <Preloader/>
 
-    return (
+    return(
         <div className="app-wrapper">
                 <HeaderContainer/>
             <Navbar/>
@@ -38,7 +38,7 @@ const App: React.FC<PropsType> = (props) => {
                         <Route path='/' exact><Redirect to='/profile'/></Route>
                         <Route exact path="/dialogs/:userId?" component={DialogsContainer}/>
                         <Route exact path="/profile/:userId?" component={ProfileContainer}/>
-                        <Route exact path="/users" component={UsersContainer}/>
+                        <Route exact path="/users" component={Users}/>
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/news" component={News}/>
                         <Route exact path="/music" component={Music}/>

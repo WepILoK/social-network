@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -11,45 +11,35 @@ import {AppStateType} from "../../redux/redux-store";
 import {ProfileType} from "../../types/types";
 
 
-class ProfileContainer extends React.Component<PropsType> {
-
-    refreshProfile() {
-        let userId: number | null = +this.props.match.params.userId;
+const ProfileContainer:React.FC<PropsType> = (props) => {
+    const refreshProfile = () => {
+        let userId: number | null = +props.match.params.userId;
         if (!userId) {
-            userId = this.props.authorizedUserId;
+            userId = props.authorizedUserId;
             if (!userId) {
-                this.props.history.push("/login")
+                props.history.push("/login")
             }
         }
-        this.props.getUserProfile(userId as number);
-        this.props.getStatus(userId as number);
+        props.getUserProfile(userId as number);
+        props.getStatus(userId as number);
     }
 
-    componentDidMount() {
-        this.refreshProfile();
-    }
+    useEffect(()=> {
+        refreshProfile();
+    }, [props.match.params.userId])
 
-    componentDidUpdate(prevProps: PropsType, prevState: PropsType) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId) {
-            this.refreshProfile();
-        }
-    }
-
-    render() {
         return (
-            <Profile {...this.props}
-                     isOwner={!this.props.match.params.userId}
-                     profile={this.props.profile}
-                     status={this.props.status}
-                     updateStatus={this.props.updateStatus}
-                     savePhoto={this.props.savePhoto}/>
+            <Profile {...props}
+                     isOwner={!props.match.params.userId}
+                     profile={props.profile}
+                     status={props.status}
+                     updateStatus={props.updateStatus}
+                     savePhoto={props.savePhoto}/>
         );
-    }
-
 }
 
 
-let mapStateToProps = (state: AppStateType) => ({
+const mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.id,
