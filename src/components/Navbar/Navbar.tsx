@@ -1,31 +1,42 @@
 import React from "react";
-import s from './Navbar.module.scss';
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons";
+import {Menu} from "antd";
 
 
-const Navbar: React.FC = () => {
+const { SubMenu } = Menu;
+
+export const Navbar: React.FC = () => {
     return (
-        <nav className={s.navbar}>
-            <div className={s.navbar_button}>
-                <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
-            </div>
-            <div className={s.navbar_button}>
-                <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
-            </div>
-            <div className={s.navbar_button}>
-                <NavLink to="/users" activeClassName={s.active}>Users</NavLink>
-            </div>
-            <div className={s.navbar_button}>
-                <NavLink to="/news" activeClassName={s.active}>News</NavLink>
-            </div>
-            <div className={s.navbar_button}>
-                <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
-            </div>
-            <div className={s.navbar_button}>
-                <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
-            </div>
-        </nav>
-    );
+        <Menu
+            mode="inline"
+            /*defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}*/
+            style={{ height: '100%' }}
+        >
+            <SubMenu key="sub1" icon={<UserOutlined />} title="My profile">
+                <Menu.Item key="1">
+                    <Link to="/profile">Profile</Link>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <Link to="/dialogs">Messages</Link>
+                </Menu.Item>
+                <Menu.Item key="3">
+                    <Link to="/music">Music</Link>
+                </Menu.Item><Menu.Item key="4">
+                <Link to="/settings">Settings</Link>
+                </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub2" icon={<LaptopOutlined />} title="Users">
+                <Menu.Item key="5">
+                    <Link to="/users">Users</Link>
+                </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub3" icon={<NotificationOutlined />} title="News">
+                <Menu.Item key="6">
+                    <Link to="/news">News</Link>
+                </Menu.Item>
+            </SubMenu>
+        </Menu>
+    )
 };
-
-export default Navbar;

@@ -16,7 +16,7 @@ import {
     getTotalUsersCount,
     getUsers,
     getUsersFilter
-} from "../../redux/users_selectors";
+} from "../../redux/selectors/users_selectors";
 
 
 export const Users: React.FC<PropsType> = () => {

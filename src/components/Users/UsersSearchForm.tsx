@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Field, Form, Formik} from "formik";
 
 import {FilterType} from "../../redux/users_reducer";
-import {getUsersFilter} from "../../redux/users_selectors";
+import {getUsersFilter} from "../../redux/selectors/users_selectors";
 
 
 export const UserSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {

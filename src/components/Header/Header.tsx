@@ -1,25 +1,52 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {Avatar, Button, Col, Layout, Menu, Row} from "antd";
+import {UserOutlined} from "@ant-design/icons";
 
-import s from './Header.module.scss';
+
+import {selectCurrentUserLogin, selectIsAuth} from "../../redux/selectors/auth_selectors";
+import {logOut} from "../../redux/auth_reducer";
 
 
-export const Header: React.FC<PropsType> = ({isAuth, login, logOut}) => {
+const {Header} = Layout;
+
+export const Headers: React.FC<PropsType> = () => {
+    const dispatch = useDispatch();
+    const isAuth = useSelector(selectIsAuth)
+
+    const OnLogOut = () => {
+        dispatch(logOut())
+    }
+
     return (
-        <header className={s.header}>
-            <img src="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_2.png" alt="logo img"/>
-            <div className={s.loginBlock}>
+        <Header className="header">
+            <div className="logo"/>
+            <Row>
+                <Col span={19}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                        <Menu.Item key="1">
+                            <Link to="/profile">Profile</Link>
+                        </Menu.Item>
+                    </Menu>
+                </Col>
                 {isAuth
-                    ? <div> {login} - <button onClick={logOut}>Log out</button></div>
-                    : <NavLink to={`/login`}>Login</NavLink>}
-
-            </div>
-        </header>
+                    ? <>
+                        <Col span={1}>
+                            <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                        </Col>
+                        <Col span={4}>
+                            <Button onClick={OnLogOut}>Log out</Button>
+                        </Col>
+                    </>
+                    : <Col span={5}>
+                        <Button>
+                            <Link to={`/login`}>Login</Link>
+                        </Button>
+                    </Col>}
+            </Row>
+        </Header>
     )
 }
 
-type PropsType = {
-    isAuth: boolean
-    login: string | null
-    logOut: () => void
-}
+type PropsType = {}
