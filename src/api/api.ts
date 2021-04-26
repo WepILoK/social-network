@@ -10,7 +10,7 @@ export const instance = axios.create({
     },
 })
 
-export enum ResultCodeEnum {
+export enum ResultCodeEnum {// enum может быть либо A либо B либо...
     Success = 0,
     Error = 1,
 }

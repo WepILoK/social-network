@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
         case "SET_USER_DATA":
         case "GET_CAPTCHA_URL_SUCCESS":
             return {
-                ...state, 
+                ...state,
                 ...action.payload,
             }
         default:
@@ -44,13 +44,6 @@ export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
     dispatch(actions.getCaptchaUrlSuccess(captchaUrl));
 };
 
-export const logOut = (): ThunkType => async (dispatch) => {
-    let logOutData = await authAPI.logOut()
-    if (logOutData.resultCode === ResultCodeEnum.Success) {
-        dispatch(actions.setAuthUserData(null, null, null, false));
-    }
-};
-
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     let meData = await authAPI.me();
     if (meData.resultCode === ResultCodeEnum.Success) {
@@ -59,19 +52,26 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
     }
 };
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string):ThunkType =>
-    async (dispatch) => {
-    const loginData = await authAPI.login(email, password, rememberMe, captcha);
-    if (loginData.resultCode === ResultCodeEnum.Success) {
-        dispatch(getAuthUserData());
-    } else {
-        if (loginData.resultCode === ResultCodeCaptchaEnum.CaptchaIsRequired) {
-            dispatch(getCaptchaUrl());
-        }
-        let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error"
-        dispatch(stopSubmit("login", {_error: message}));
+export const logOut = (): ThunkType => async (dispatch) => {
+    let logOutData = await authAPI.logOut()
+    if (logOutData.resultCode === ResultCodeEnum.Success) {
+        dispatch(actions.setAuthUserData(null, null, null, false));
     }
 };
+
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
+    async (dispatch) => {
+        const loginData = await authAPI.login(email, password, rememberMe, captcha);
+        if (loginData.resultCode === ResultCodeEnum.Success) {
+            dispatch(getAuthUserData());
+        } else {
+            if (loginData.resultCode === ResultCodeCaptchaEnum.CaptchaIsRequired) {
+                dispatch(getCaptchaUrl());
+            }
+            let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error"
+            dispatch(stopSubmit("login", {_error: message}));
+        }
+    };
 
 export default authReducer
 

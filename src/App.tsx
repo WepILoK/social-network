@@ -24,6 +24,7 @@ const {Content, Footer, Sider } = Layout;
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+const ChatPage = React.lazy(() => import("./pages/Chat/ChatPage"));
 
 const App: React.FC<PropsType> = (props) => {
     React.useEffect(() => {
@@ -50,6 +51,7 @@ const App: React.FC<PropsType> = (props) => {
                                 <Route path='/' exact><Redirect to='/profile'/></Route>
                                 <Route exact path="/dialogs/:userId?" component={DialogsContainer}/>
                                 <Route exact path="/profile/:userId?" component={ProfileContainer}/>
+                                <Route exact path="/chat" component={ChatPage}/>
                                 <Route exact path="/users" component={Users}/>
                                 <Route exact path="/login" component={Login}/>
                                 <Route exact path="/news" component={News}/>
